@@ -28,7 +28,7 @@ jobs:
         JQ_QUERY=".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"
         ARTIFACTS=`$QUERY`
         echo $ARTIFACTS
-        ARTIFACT_1=`$QUERY | jq ".artifacts.[]"`
+        ARTIFACT_1=`$QUERY | jq ".artifacts"`
         echo $ARTIFACT_1
         ARTIFACT_2=`$QUERY | jq ".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"`
         echo $ARTIFACT_2
