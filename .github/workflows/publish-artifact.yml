@@ -26,6 +26,8 @@ jobs:
         REPO_URL="https://api.github.com/repos/romandemidov/snap-desktopeditors/actions/artifacts"
         QUERY="curl -L $REPO_URL"
         JQ_QUERY=".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"
+        ARTIFACTS=`$QUERY`
+        echo $ARTIFACTS
         ARTIFACT_ID=`$QUERY | jq "$JQ_QUERY | .id"`
         curl -o package.zip -L \
           -H "Accept: application/vnd.github+json" \
@@ -35,5 +37,11 @@ jobs:
         unzip package.zip
         ls -la
 
-
+    - name: Publish snap
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_TOKEN }}
+      with:
+        snap: package.snap
+        release: beta
 
