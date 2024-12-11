@@ -23,6 +23,7 @@ jobs:
         VERSION=${{ github.event.inputs.version }}
         BUILD_NUMBER=${{ github.event.inputs.build }}
         #
+        jq --version
         REPO_URL="https://api.github.com/repos/romandemidov/snap-desktopeditors/actions/artifacts"
         QUERY="curl -L $REPO_URL"
         JQ_QUERY=".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"
