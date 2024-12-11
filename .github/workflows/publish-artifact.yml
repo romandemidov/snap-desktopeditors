@@ -26,13 +26,7 @@ jobs:
         jq --version
         REPO_URL="https://api.github.com/repos/romandemidov/snap-desktopeditors/actions/artifacts"
         QUERY="curl -L $REPO_URL"
-        JQ_QUERY=".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"
-        ARTIFACTS=`$QUERY`
-        echo $ARTIFACTS
-        ARTIFACT_1=`$QUERY | jq ".artifacts"`
-        echo $ARTIFACT_1
-        ARTIFACT_2=`$QUERY | jq ".artifacts.[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"`
-        echo $ARTIFACT_2
+        JQ_QUERY=".artifacts | .[] | select(.name | test(\"$VERSION-$BUILD_NUMBER\"))"
         ARTIFACT_ID=`$QUERY | jq "$JQ_QUERY | .id"`
         curl -o package.zip -L \
           -H "Accept: application/vnd.github+json" \
