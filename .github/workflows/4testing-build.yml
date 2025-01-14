@@ -16,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - name: Check out Git repository
       uses: actions/checkout@v4
@@ -36,7 +36,12 @@ jobs:
     - name: Build snap
       uses: snapcore/action-build@v1
       id: build
-      
+
+    - name: Redirect stdout stream to file
+      run: |
+        exec 6>&1
+        exec > snap-publish-out.txt
+
     - name: Publish snap
       uses: snapcore/action-publish@v1
       env:
@@ -44,6 +49,11 @@ jobs:
       with:
         snap: ${{ steps.build.outputs.snap }}
         release: beta
+
+    - name: Restore stdout stream
+      run: |
+        exec 1>&6 6>&-
+        cat snap-publish-out.txt
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
