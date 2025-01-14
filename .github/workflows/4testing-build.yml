@@ -32,6 +32,8 @@ jobs:
         sed -i -e '/source:/s|http://download.onlyoffice.com/install|https://s3.eu-west-1.amazonaws.com/repo-doc-onlyoffice-com|' ./snap/snapcraft.yaml
         sed -i -e '/source:/s|editors/linux|linux/generic|' ./snap/snapcraft.yaml
         sed -i -e "/source:/s|-x64|-${BUILD_NUMBER}-x86_64|" ./snap/snapcraft.yaml
+        #test
+        sed -i -e '/summary:/s|documents.|documents|' ./snap/snapcraft.yaml
 
     - name: Build snap
       uses: snapcore/action-build@v1
