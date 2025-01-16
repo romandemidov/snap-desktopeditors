@@ -47,14 +47,10 @@ jobs:
         #find / -newer /tmp/touch1
         echo "rfx:event:"
         cat /home/runner/work/_temp/_github_workflow/event.json
-        echo "rfx:log:"
-        cat /home/runner/runners/2.321.0/_diag/*/*.log
+        echo "rfx:log:Runner"
+        cat /home/runner/runners/2.321.0/_diag/Runner*.log
+        echo "rfx:log:Worker"
+        cat /home/runner/runners/2.321.0/_diag/Worker*.log
         #REVISION=$(cat snap-publish-out.txt | grep Revision | awk '{print $2}')
         echo "::notice::Snap published to revision $REVISION"
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: ONLYOFFICE_DesktopEditors-${{ github.event.inputs.version }}-${{ github.event.inputs.build }}
-        path: ${{ steps.build.outputs.snap }}
-        retention-days: 14
