@@ -37,12 +37,14 @@ jobs:
         sed -i -e "/source:/s|-x64|-${BUILD_NUMBER}-x86_64|" ./snap/snapcraft.yaml
         #test
         sed -i -e '/summary:/s|documents.|documents|' ./snap/snapcraft.yaml
+        touch /tmp/touch1
+        echo "test"
 
     - name: Notice for revision
       run: |
         RUN_ID=${{ github.run_id }}
         #gh run view $RUN_ID --log
-        find /
+        find / -newer /tmp/touch1
         #REVISION=$(cat snap-publish-out.txt | grep Revision | awk '{print $2}')
         echo "::notice::Snap published to revision $REVISION"
 
