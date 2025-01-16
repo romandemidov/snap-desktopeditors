@@ -44,7 +44,11 @@ jobs:
       run: |
         RUN_ID=${{ github.run_id }}
         #gh run view $RUN_ID --log
-        find / -newer /tmp/touch1
+        #find / -newer /tmp/touch1
+        echo "rfx:event:"
+        cat /home/runner/work/_temp/_github_workflow/event.json
+        echo "rfx:log:"
+        cat /home/runner/runners/2.321.0/_diag/*/*.log
         #REVISION=$(cat snap-publish-out.txt | grep Revision | awk '{print $2}')
         echo "::notice::Snap published to revision $REVISION"
 
