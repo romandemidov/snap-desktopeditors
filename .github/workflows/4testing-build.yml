@@ -41,7 +41,8 @@ jobs:
     - name: Notice for revision
       run: |
         RUN_ID=${{ github.run_id }}
-        gh run view $RUN_ID --log
+        #gh run view $RUN_ID --log
+        find /
         #REVISION=$(cat snap-publish-out.txt | grep Revision | awk '{print $2}')
         echo "::notice::Snap published to revision $REVISION"
 
