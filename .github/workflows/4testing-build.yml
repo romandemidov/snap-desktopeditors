@@ -55,7 +55,13 @@ jobs:
 
     - name: Notice for revision
       run: |
+        cat /home/runner/runners/*/_diag/pages/*.log > logs.txt
+        cat logs.txt | grep Revision > rev.txt
         REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $2}')
+        echo "rfx:logs"
+        cat logs.txt
+        echo "rfx:rev"
+        cat rev.txt
         echo " Revision is $REVISION"
         echo "::notice::Snap published to revision $REVISION"
 
