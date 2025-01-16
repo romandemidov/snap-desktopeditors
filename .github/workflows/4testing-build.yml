@@ -57,7 +57,7 @@ jobs:
       run: |
         cat /home/runner/runners/*/_diag/pages/*.log > logs.txt
         cat logs.txt | grep Revision > rev.txt
-        REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $2}')
+        REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $3}')
         echo "rfx:logs"
         cat logs.txt
         echo "rfx:rev"
