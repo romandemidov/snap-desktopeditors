@@ -63,5 +63,8 @@ jobs:
         echo "rfx:rev"
         cat rev.txt
         echo " Revision is $REVISION"
-        echo "::notice::Snap published to revision $REVISION"
+        #echo "::notice::Snap published to revision $REVISION"
+        for STR in $REVISION; do
+          echo "::notice::Snap published to revision $STR"
+        done
 
