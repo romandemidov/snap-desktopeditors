@@ -50,10 +50,10 @@ jobs:
     - name: Notice for revision
       run: |
         echo "RFX: find"
-        sudo find / -name *.log
+        #sudo find / -name *.log
         echo "RFX: log"
-        cat /home/runner/actions-runner/*/_diag/pages/*.log
-        REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $3}')
+        #cat /home/runner/actions-runner/*/_diag/pages/*.log
+        REVISION=$(cat /home/runner/actions-runner/*/_diag/pages/*.log | grep Revision | awk '{print $3}')
         for STR in $REVISION; do
           echo "::notice::Snap published to revision $STR"
         done
