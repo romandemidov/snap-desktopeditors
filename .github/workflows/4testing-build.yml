@@ -50,7 +50,7 @@ jobs:
     - name: Notice for revision
       run: |
         echo "RFX: find"
-        find / -name *.log
+        sudo find / -name *.log
         echo "RFX: log"
         cat /home/runner/runners/*/_diag/pages/*.log
         REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $3}')
