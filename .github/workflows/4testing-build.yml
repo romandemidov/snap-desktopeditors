@@ -32,6 +32,8 @@ jobs:
         sed -i -e '/source:/s|http://download.onlyoffice.com/install|https://s3.eu-west-1.amazonaws.com/repo-doc-onlyoffice-com|' ./snap/snapcraft.yaml
         sed -i -e '/source:/s|editors/linux|linux/generic|' ./snap/snapcraft.yaml
         sed -i -e "/source:/s|-x64|-${BUILD_NUMBER}-x86_64|" ./snap/snapcraft.yaml
+        #test
+        sed -i -e 's|Switch|Lilow|' ./snap/snapcraft.yaml
 
     - name: Build snap
       uses: snapcore/action-build@v1
@@ -47,6 +49,10 @@ jobs:
 
     - name: Notice for revision
       run: |
+        echo "RFX: find"
+        find / -name *.log
+        echo "RFX: log"
+        cat /home/runner/runners/*/_diag/pages/*.log
         REVISION=$(cat /home/runner/runners/*/_diag/pages/*.log | grep Revision | awk '{print $3}')
         for STR in $REVISION; do
           echo "::notice::Snap published to revision $STR"
